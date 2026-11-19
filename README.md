@@ -9,8 +9,16 @@ Prerequisites: **Git**, **Docker Engine/Desktop with Docker Compose v2**, a POSI
 ```sh
 git clone https://github.com/spitefulme/twiggle.git
 cd twiggle
+
+# Build and start Twiggle, its database and background workers.
 ./setup.sh
+
+# First installation only: choose your administrator username and password.
+# This creates your workspace; no default account or password is provided.
 ./twiggle.sh owner
+
+# Recommended: check that the database, workers and download service are ready.
+# Run this again after upgrades or when troubleshooting; it is not a full test suite.
 ./twiggle.sh verify
 ```
 
