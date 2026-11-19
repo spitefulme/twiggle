@@ -1,0 +1,39 @@
+.u4-evidence{display:grid;gap:.75rem;margin-block:1rem;padding:1rem;background:#fff;border:1px solid #d4d8e1;border-radius:.85rem;color:#272b32;min-width:0}
+.u4-evidence h2,.u4-evidence h3,.u4-evidence h4,.u4-evidence p{margin:0}
+.u4-evidence label,.u4-evidence-controls,.u4-evidence-inspector,.u4-candidate,.u4-candidate-fields{display:grid;gap:.55rem;min-width:0}
+.u4-card-filters:not(:empty){margin-block:1rem}
+.u4-card-right{min-width:0}
+.u4-card-draft{border-top:1px solid #d4d8e1;padding-top:.75rem;margin-top:1rem;display:grid;gap:.5rem}
+.u4-card-draft .u4-draft-launch{justify-content:start}
+.u4-evidence--card .u4-job-controls [role=status]:not(:empty){order:-1;background:#fff3d5;border-left:4px solid #89620b;padding:.5rem;border-radius:.4rem}
+.u4-card-filters select,.u4-card-filters button{width:100%;min-width:0}
+.u4-evidence select,.u4-evidence input{width:100%;min-width:0}
+.u4-evidence-context{color:#4d5c75;overflow-wrap:anywhere;font-size:.88rem}
+.u4-evidence-detail{border-radius:.65rem;background:#f1f3f6;padding:.7rem}
+.u4-evidence-detail summary{cursor:pointer;font-weight:650;padding:.25rem}
+.u4-detail-row{padding:.5rem;border-bottom:1px solid #d4d8e1;overflow-wrap:anywhere}
+.u4-detail-row p + p{margin-top:.25rem}
+.u4-placement-table{width:100%;table-layout:fixed;border-collapse:collapse;text-align:left}
+.u4-placement-table th,.u4-placement-table td{padding:.4rem;border-bottom:1px solid #d4d8e1;overflow-wrap:anywhere}
+.u4-job-controls,.u4-candidate-actions,.u4-node{display:flex;gap:.55rem;flex-wrap:wrap;align-items:end}
+.u4-job-controls label,.u4-node label{flex:1 1 8rem}
+.u4-job-controls p{flex-basis:100%}
+.u4-job-controls a{display:inline-block;text-decoration:none}
+.u4-candidate{border-top:1px solid #d4d8e1;padding-block-start:.8rem}
+.u4-evidence [role=status]:empty{display:none}
+.u4-draft-launch{display:grid;gap:.5rem}
+.u4-draft-launch [hidden]{display:none}
+.u4-tree-overview{border:1px solid #d4d8e1;border-radius:.85rem;background:#fff;padding:.85rem;margin-block:1rem;color:#272b32;min-width:0}
+.u4-tree-counts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;margin:0 0 .75rem}
+.u4-tree-counts>div{padding:.6rem .45rem;border-radius:.55rem;background:#f1f3f6;display:flex;flex-direction:column-reverse;gap:.25rem}
+.u4-tree-counts dt{font-size:.78rem;color:#4d5c75}.u4-tree-counts dd{margin:0;font-size:1.35rem;font-weight:700}
+.u4-tree-overview-bar{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;justify-content:space-between}
+.u4-tree-overview-bar>h2{font-size:1.05rem;margin:0}
+.u4-tree-bars{padding:0;list-style:none;font-size:.85rem;display:grid;gap:.55rem}
+.u4-tree-bars li>div{display:flex;justify-content:space-between;gap:.4rem}
+.u4-tree-bars meter{display:block;width:100%;height:.55rem;accent-color:#5f800c}
+.u4-tree-overview>.u4-evidence-context{margin:.6rem 0 0}
+@media(min-width:850px){
+  .u4-evidence:not(.u4-evidence--card)>.u4-evidence-controls{grid-template-columns:minmax(10rem,1fr) auto minmax(8rem,1fr);align-items:end}
+}
+@media(max-width:550px){.u4-evidence{padding:.75rem}.u4-job-controls>label{flex-basis:100%}.u4-candidate-actions>*{flex:1 1 10rem}}

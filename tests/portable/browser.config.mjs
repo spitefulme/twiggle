@@ -1,0 +1,2 @@
+import {defineConfig,devices} from '@playwright/test';
+export default defineConfig({testDir:'.', testMatch:'journeys.spec.mjs',timeout:60000,expect:{timeout:5000},workers:1,retries:0,reporter:[['list'],['json',{outputFile:'/evidence/browser.json'}]],outputDir:'/evidence/browser-artifacts',use:{baseURL:process.env.TWIGGLE_TEST_ORIGIN,trace:'retain-on-failure'},projects:[{name:'chromium-desktop',use:{...devices['Desktop Chrome']}},{name:'chromium-phone',use:{...devices['iPhone 13'],defaultBrowserType:'chromium'}}]});

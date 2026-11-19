@@ -1,0 +1,7 @@
+installation.env
+.private/
+__pycache__/
+*.pyc
+node_modules/
+test-results/
+.playwright/

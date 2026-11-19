@@ -1,0 +1,6 @@
+FROM mcr.microsoft.com/playwright:v1.65.1-noble
+WORKDIR /qa
+COPY package.json package-lock.json ./
+RUN npm ci --ignore-scripts
+COPY tests/portable ./tests/portable
+CMD ["npx", "playwright", "test", "--config=tests/portable/browser.config.mjs"]

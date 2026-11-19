@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Twiggle — Workspace administration</title>
+<link rel="stylesheet" href="/static/u1/app.css">
+<link rel="stylesheet" href="/static/u5/governance.css">
+<script type="module" src="/static/u5/governance.mjs"></script>
+</head>
+<body class="researcher">
+<a class="skip-link" href="#main" data-testid="governance-skip">Skip to content</a>
+<header class="brand-header"><a class="brand" href="/" data-testid="governance-studies"><span class="brand-mark" aria-hidden="true"></span>Twiggle</a>
+<nav aria-label="Breadcrumb"><a href="/" data-testid="governance-home">Studies</a> / Workspace administration</nav></header>
+<main id="main" data-workspace="{{ workspace_id }}" data-erasure="{{ erasure_available|yesno:'true,false' }}">
+  <div class="governance-panel">
+    <p class="eyebrow">Research workspace</p><h1>Workspace administration</h1>
+    <p id="status" role="status" data-testid="governance-status" tabindex="-1">Loading</p>
+    <div class="governance-tabs" role="tablist" aria-label="Workspace administration">
+      <button type="button" role="tab" id="governance-members-tab" aria-controls="governance-members-panel" aria-selected="true" data-testid="governance-members-tab">Members</button>
+      <button type="button" role="tab" id="governance-audit-tab" aria-controls="governance-audit-panel" aria-selected="false" tabindex="-1" data-testid="governance-audit-tab">Audit</button>
+    </div>
+    <section id="governance-members-panel" role="tabpanel" aria-labelledby="governance-members-tab" tabindex="0">
+     <div class="governance-layout">
+      <section aria-labelledby="governance-members-heading">
+      <h2 id="governance-members-heading">Members</h2>
+      <details class="governance-admit">
+        <summary data-testid="governance-admit-toggle">+ Admit</summary>
+      <form data-testid="governance-admit-form">
+        <label>Existing account username<input name="username" data-testid="governance-member-user" maxlength="150" autocomplete="off" required></label>
+        <button type="submit" class="secondary" data-testid="governance-admit">Grant member access</button>
+      </form>
+      </details>
+      <ul data-testid="governance-members"></ul>
+      </section>
+      <aside class="governance-audit-preview" aria-labelledby="governance-preview-heading">
+        <h2 id="governance-preview-heading">Recent audit activity</h2>
+        <ul data-testid="governance-audit-preview"></ul>
+        <button type="button" class="secondary" data-testid="governance-open-audit">View audit</button>
+      </aside>
+     </div>
+    <section aria-labelledby="governance-erasure-heading">
+      <h2 id="governance-erasure-heading">Study erasure</h2>
+      {% if erasure_available %}
+      <label>Study<select data-testid="governance-study"></select></label>
+      <button type="button" class="secondary" data-testid="governance-delete-study" disabled>Request study erasure</button>
+      {% else %}
+      <p>Study erasure is unavailable in this local workspace.</p>
+      {% endif %}
+      <button type="button" class="secondary" data-testid="governance-refresh">Refresh case status</button>
+      <ul data-testid="governance-cases"></ul>
+    </section>
+    </section>
+    <section id="governance-audit-panel" role="tabpanel" aria-labelledby="governance-audit-tab" tabindex="0" hidden>
+      <h2>Audit activity</h2>
+      <p data-testid="governance-audit-privacy">Participant payloads are never shown in the audit list.</p>
+      <p class="muted">Showing up to 50 recent workspace events.</p>
+      <div class="governance-audit-filters">
+        <label>Actor<select data-testid="governance-audit-actor"><option value="">All actors</option></select></label>
+        <label>Action<select data-testid="governance-audit-action"><option value="">All actions</option></select></label>
+      </div>
+      <p data-testid="governance-audit-count" aria-live="polite"></p>
+      <ul data-testid="governance-audit"></ul>
+    </section>
+  </div>
+</main>
+</body>
+</html>

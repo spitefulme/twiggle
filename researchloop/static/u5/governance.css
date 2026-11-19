@@ -1,0 +1,28 @@
+.governance-panel { max-inline-size: 52rem; margin-inline: auto; padding: clamp(1rem, 4vw, 2rem); }
+.governance-panel section { margin-block: 1.5rem; }
+.governance-panel ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .65rem; }
+.governance-panel li { padding: .75rem; border: 1px solid #d1d5db; border-radius: .625rem; overflow-wrap: anywhere; }
+.governance-panel [data-testid=governance-membership] { display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
+.governance-panel .governance-role { padding: .25rem .5rem; border-radius: .5rem; background: #eaf0ff; color: #172554; }
+.governance-panel button { min-block-size: 44px; }
+.governance-panel :focus-visible { outline: 3px solid #3653b6; outline-offset: 3px; }
+.governance-panel select { max-inline-size: 100%; }
+.governance-tabs { display: flex; gap: .35rem; border-block-end: 1px solid #d1d5db; }
+.governance-tabs button { border: 0; border-block-end: .2rem solid transparent; background: transparent; padding-inline: 1rem; }
+.governance-tabs button[aria-selected=true] { color: #253783; border-block-end-color: #3653b6; font-weight: 650; }
+.governance-panel [role=tabpanel][hidden] { display: none; }
+.governance-admit { margin-block: .5rem .9rem; }
+.governance-admit summary { cursor: pointer; color: #253783; font-weight: 650; min-block-size: 44px; padding-block: .6rem; width: fit-content; }
+.governance-audit-filters { display: flex; flex-wrap: wrap; gap: .75rem; }
+.governance-audit-filters label { flex: 1 1 9rem; min-inline-size: 0; }
+.governance-audit-row { display: grid; gap: .2rem; }
+.governance-audit-row time { color: #4b5563; font-variant-numeric: tabular-nums; }
+.governance-case-reference { display: block; margin-block-start: .25rem; color: #4b5563; }
+.governance-audit-preview { display: none; }
+@media (min-width: 1024px) {
+  .governance-panel { max-inline-size: 72rem; }
+  .governance-layout { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 1.5rem; }
+  .governance-audit-preview { display: block; align-self: start; margin-block: 1.5rem; padding: 1rem; border: 1px solid #d1d5db; border-radius: .625rem; }
+  .governance-audit-preview button { margin-block-start: .75rem; }
+  .governance-panel [data-testid=governance-membership] { display: grid; grid-template-columns: minmax(8rem, 1fr) minmax(7rem, .75fr) minmax(8rem, auto); }
+}

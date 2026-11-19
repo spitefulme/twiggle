@@ -1,0 +1,67 @@
+x-app: &app
+  build: .
+  image: ${COMPOSE_PROJECT_NAME:?}-app:local
+  environment: &env
+    DJANGO_SETTINGS_MODULE: researchloop.config.portable_settings
+    TWIGGLE_SECRET_KEY: ${TWIGGLE_SECRET_KEY:?}
+    TWIGGLE_ORIGIN: ${TWIGGLE_ORIGIN:?}
+    POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+    U4_PRIVATE_ARTIFACTS: /artifacts
+  volumes:
+    - artifacts:/artifacts
+  security_opt: [no-new-privileges:true]
+  cap_drop: [ALL]
+  read_only: true
+  tmpfs: ['/tmp:size=64m,mode=1777']
+  mem_limit: 768m
+  cpus: 1.0
+  pids_limit: 128
+  restart: unless-stopped
+  depends_on:
+    migrate:
+      condition: service_completed_successfully
+services:
+  db:
+    image: postgres:16.10-alpine
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_ADMIN_PASSWORD:?}
+      TWIGGLE_APP_PASSWORD: ${POSTGRES_PASSWORD:?}
+    volumes:
+      - database:/var/lib/postgresql/data
+      - ./ops/init-database.sh:/docker-entrypoint-initdb.d/10-twiggle.sh:ro
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U twiggle -d twiggle']
+      interval: 3s
+      timeout: 3s
+      retries: 30
+    mem_limit: 512m
+    cpus: 1.0
+    pids_limit: 128
+    restart: unless-stopped
+  migrate:
+    <<: *app
+    command: [python, manage.py, migrate, --noinput]
+    restart: "no"
+    depends_on:
+      db:
+        condition: service_healthy
+  web:
+    <<: *app
+    command: [gunicorn, researchloop.config.portable_wsgi:application, --bind, '0.0.0.0:8000', --workers, '2', --worker-class, researchloop.evidence_delivery.transport.GuardedSyncWorker, --timeout, '75', --access-logfile, /dev/null, --error-logfile, '-']
+    ports: ['127.0.0.1:${TWIGGLE_PORT:?}:8000']
+    healthcheck:
+      test: [CMD, python, ops/health.py]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+  analysis:
+    <<: *app
+    command: [python, manage.py, run_analysis_jobs]
+  exports:
+    <<: *app
+    command: [python, manage.py, portable_exports]
+volumes:
+  database:
+  artifacts:
